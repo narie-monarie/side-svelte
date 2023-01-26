@@ -2,6 +2,7 @@
   import user1 from "../assets/img1.png";
   import user2 from "../assets/img2.png";
   import user3 from "../assets/img3.png";
+  import FilterUser from "./FilterUser.svelte";
   import User from "./User.svelte";
   let users = [
     {
@@ -42,27 +43,13 @@
 </script>
 
 <main>
-  <div class="mx-auto container my-7 items-center">
-    <div>
-      <h1 class="mt-10 mb-4 text-center text-2xl">List of Users</h1>
-    </div>
-    <select
-      on:change={filter}
-      name="user-filter"
-      id="user-filter"
-      class="border rounded-lg px-4 py-2 ml-2"
-    >
-      <option value={null}>All</option>
-      <option value={true}>Active</option>
-      <option value={false}>Inactive</option>
-    </select>
-    <div>
-      {#each filteredUsers as user, i (user.id)}
-        <User {user} {i} />
-      {:else}
-        <p>User Not Found</p>
-      {/each}
-    </div>
+  <FilterUser {filter} />
+  <div>
+    {#each filteredUsers as user, i (user.id)}
+      <User {user} {i} />
+    {:else}
+      <p>User Not Found</p>
+    {/each}
   </div>
 </main>
 
